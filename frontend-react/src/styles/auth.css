@@ -1,0 +1,102 @@
+/* General Styles */
+body {
+    font-family: "Poppins", sans-serif;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    margin: 0;
+  }
+  
+  /* Auth Container */
+  .auth-container {
+    background: white;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    width: 350px;
+    max-width: 90%;
+    animation: fadeIn 0.5s ease-in-out;
+  }
+  
+  /* Fade-in Animation */
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(-20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  .auth-container h2 {
+    color: #333;
+    margin-bottom: 20px;
+    font-weight: 600;
+  }
+  
+  /* Input Fields */
+  .auth-container input {
+    width: 90%;
+    padding: 12px;
+    margin: 8px 0;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 16px;
+    transition: 0.3s ease-in-out;
+  }
+  
+  .auth-container input:focus {
+    border-color: #667eea;
+    outline: none;
+    box-shadow: 0 0 5px rgba(102, 126, 234, 0.5);
+  }
+  
+  /* Buttons */
+  .auth-container button {
+    width: 100%;
+    padding: 12px;
+    background: #101e2c;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: all 0.3s ease-in-out;
+  }
+  
+  .auth-container button:hover {
+    background: #5642a6;
+    transform: scale(1.05);
+  }
+  
+  /* Links */
+  .auth-container p {
+    margin-top: 15px;
+    font-size: 14px;
+  }
+  
+  .auth-container a {
+    color: #667eea;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s ease-in-out;
+  }
+  
+  .auth-container a:hover {
+    text-decoration: underline;
+    color: #5642a6;
+  }
+  
+  /* Error Message */
+  .auth-container .error {
+    color: red;
+    font-size: 14px;
+    margin-bottom: 10px;
+  }
+  
