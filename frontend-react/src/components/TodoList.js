@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { fetchTodos, addTodo, updateTodo, deleteTodo } from "../api/todoApi";
-import { loginUser, registerUser } from "../api/todoApi"; 
-import { useNavigate } from "react-router-dom"; 
+import { fetchTodos, addTodo, updateTodo, deleteTodo, loginUser, registerUser } from "../api/todoApi";
+import { useNavigate } from "react-router-dom";
 import "../styles/TodoList.css";
 
 const TodoList = () => {
@@ -14,15 +13,12 @@ const TodoList = () => {
     DueDate: "",
   });
 
-  const [user, setUser] = useState(null); 
+  const [errors, setErrors] = useState({});
+  const [user, setUser] = useState(null);
   const [authData, setAuthData] = useState({ identifier: "", password: "" });
-  const [registerData, setRegisterData] = useState({
-    username: "",
-    email: "",
-    password: "",
-  });
+  const [registerData, setRegisterData] = useState({ username: "", email: "", password: "" });
 
-  const navigate = useNavigate(); 
+  const navigate = useNavigate();
 
   useEffect(() => {
     fetchTodosList();
@@ -73,10 +69,36 @@ const TodoList = () => {
   };
 
   const handleAddTodo = async () => {
-    if (!newTodo.Title.trim()) return;
-    await addTodo(newTodo);
-    setNewTodo({ Title: "", Description: "", TodoStatus: "pending", Priority: "medium", DueDate: "" });
-    fetchTodosList();
+    setErrors({});
+
+    const today = new Date().toISOString().split("T")[0]; // Define today here
+
+    if (!newTodo.Title.trim()) {
+      setErrors({ Title: "Task title is required" });
+      return;
+    }
+
+    if (newTodo.DueDate < today) {
+      setErrors({ DueDate: "Due date cannot be in the past" });
+      return;
+    }
+
+    try {
+      await addTodo(newTodo);
+      setNewTodo({ Title: "", Description: "", TodoStatus: "pending", Priority: "medium", DueDate: "" });
+      fetchTodosList();
+    } catch (error) {
+      if (error && error.error && error.error.details && error.error.details.errors) {
+        // Strapi validation error format
+        const errorMessages = {};
+        error.error.details.errors.forEach(err => {
+          errorMessages[err.path[0]] = err.message;
+        });
+        setErrors(errorMessages);
+      } else {
+        setErrors({ general: "Something went wrong. Please try again." });
+      }
+    }
   };
 
   const handleUpdateStatus = async (documentId, newStatus) => {
@@ -101,31 +123,67 @@ const TodoList = () => {
 
   return (
     <div className="container">
-      <div className="left-section">
-        <h1>Organized? Stressed? Or feeling</h1>
-        <p>You will discover the perfect task manager for any workflow.</p>
-        <div className="illustration">
-          <img src="https://images.pexels.com/photos/3201693/pexels-photo-3201693.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="Task Illustration" />
-        </div>
-        <p>Manage your tasks efficiently, anytime, anywhere!</p>
-      </div>
-
       <div className="right-section">
         {user ? (
           <>
             <h2>Welcome, {user.username}!</h2>
-            <button className="logout-btn" onClick={handleLogout}>Logout</button>
+            <button className="logout-btn" onClick={handleLogout}>
+              Logout
+            </button>
 
             <div className="todo-input">
-              <input type="text" placeholder="Task title..." value={newTodo.Title} onChange={(e) => setNewTodo({ ...newTodo, Title: e.target.value })} />
-              <input type="text" placeholder="Description..." value={newTodo.Description} onChange={(e) => setNewTodo({ ...newTodo, Description: e.target.value })} />
-              <select value={newTodo.Priority} onChange={(e) => setNewTodo({ ...newTodo, Priority: e.target.value })}>
+              <input
+                type="text"
+                placeholder="Task title..."
+                value={newTodo.Title}
+                onChange={(e) =>
+                  setNewTodo({ ...newTodo, Title: e.target.value })
+                }
+              />
+              {errors.Title && <p className="error-message">{errors.Title}</p>}
+
+              <input
+                type="text"
+                placeholder="Description..."
+                value={newTodo.Description}
+                onChange={(e) =>
+                  setNewTodo({ ...newTodo, Description: e.target.value })
+                }
+              />
+              {errors.Description && (
+                <p className="error-message">{errors.Description}</p>
+              )}
+
+              <select
+                value={newTodo.Priority}
+                onChange={(e) =>
+                  setNewTodo({ ...newTodo, Priority: e.target.value })
+                }
+              >
                 <option value="low">Low</option>
                 <option value="medium">Medium</option>
                 <option value="high">High</option>
               </select>
-              <input type="date" value={newTodo.DueDate} onChange={(e) => setNewTodo({ ...newTodo, DueDate: e.target.value })} />
+              {errors.Priority && (
+                <p className="error-message">{errors.Priority}</p>
+              )}
+
+              <input
+                type="date"
+                value={newTodo.DueDate}
+                min={new Date().toISOString().split("T")[0]} // This prevents past dates
+                onChange={(e) =>
+                  setNewTodo({ ...newTodo, DueDate: e.target.value })
+                }
+              />
+              {errors.DueDate && (
+                <p className="error-message">{errors.DueDate}</p>
+              )}
+
               <button onClick={handleAddTodo}>Add</button>
+              {errors.general && (
+                <p className="error-message">{errors.general}</p>
+              )}
             </div>
 
             <table className="todo-table">
@@ -145,24 +203,42 @@ const TodoList = () => {
                     <td>{todo.Title}</td>
                     <td>{todo.Description || "No description"}</td>
                     <td>
-                      <select value={todo.TodoStatus} onChange={(e) => handleUpdateStatus(todo.documentId, e.target.value)}>
+                      <select
+                        value={todo.TodoStatus}
+                        onChange={(e) =>
+                          handleUpdateStatus(todo.documentId, e.target.value)
+                        }
+                      >
                         <option value="pending">Pending</option>
                         <option value="in-progress">In Progress</option>
                         <option value="completed">Completed</option>
                       </select>
                     </td>
                     <td>
-                      <select value={todo.Priority} onChange={(e) => handleUpdatePriority(todo.documentId, e.target.value)}>
+                      <select
+                        value={todo.Priority}
+                        onChange={(e) =>
+                          handleUpdatePriority(todo.documentId, e.target.value)
+                        }
+                      >
                         <option value="low">Low</option>
                         <option value="medium">Medium</option>
                         <option value="high">High</option>
                       </select>
                     </td>
                     <td>
-                      <input type="date" value={todo.DueDate} onChange={(e) => handleUpdateDueDate(todo.documentId, e.target.value)} />
+                      <input
+                        type="date"
+                        value={todo.DueDate}
+                        onChange={(e) =>
+                          handleUpdateDueDate(todo.documentId, e.target.value)
+                        }
+                      />
                     </td>
                     <td>
-                      <button onClick={() => handleDeleteTodo(todo.documentId)}>Delete</button>
+                      <button onClick={() => handleDeleteTodo(todo.documentId)}>
+                        Delete
+                      </button>
                     </td>
                   </tr>
                 ))}
@@ -175,18 +251,23 @@ const TodoList = () => {
             <p>Enjoy 7 days of premium features. Cancel anytime.</p>
 
             <form className="auth-form" onSubmit={handleLogin}>
-              <input type="text" placeholder="Username or Email" value={authData.identifier} onChange={(e) => setAuthData({ ...authData, identifier: e.target.value })} />
-              <input type="password" placeholder="Password" value={authData.password} onChange={(e) => setAuthData({ ...authData, password: e.target.value })} />
+              <input
+                type="text"
+                placeholder="Username or Email"
+                value={authData.identifier}
+                onChange={(e) =>
+                  setAuthData({ ...authData, identifier: e.target.value })
+                }
+              />
+              <input
+                type="password"
+                placeholder="Password"
+                value={authData.password}
+                onChange={(e) =>
+                  setAuthData({ ...authData, password: e.target.value })
+                }
+              />
               <button type="submit">Login</button>
-            </form>
-
-            <p className="or-text">or register</p>
-
-            <form className="auth-form" onSubmit={handleRegister}>
-              <input type="text" placeholder="Username" value={registerData.username} onChange={(e) => setRegisterData({ ...registerData, username: e.target.value })} />
-              <input type="email" placeholder="Email" value={registerData.email} onChange={(e) => setRegisterData({ ...registerData, email: e.target.value })} />
-              <input type="password" placeholder="Password" value={registerData.password} onChange={(e) => setRegisterData({ ...registerData, password: e.target.value })} />
-              <button type="submit">Register</button>
             </form>
           </>
         )}

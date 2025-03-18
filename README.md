@@ -27,8 +27,8 @@ Ensure you have the following installed:
 ### Backend Setup (Strapi)
 1. Clone the repository:
    ```bash
-   git clone https://github.com/your-username/productivity-app-backend.git
-   cd productivity-app-backend
+   git clone https://github.com/Suparnas/ProductivityApp.git
+   cd backend-strapi
    ```
 2. Install dependencies:
    ```bash

@@ -13,13 +13,14 @@ export const fetchTodos = async () => {
   }
 };
 
-// ✅ Add Todo
+// ✅ Add Todo (Now Returns Error to Frontend)
 export const addTodo = async (todoData) => {
   try {
     const response = await axios.post(`${API_URL}/todos`, { data: todoData });
     return response.data.data;
   } catch (error) {
-    console.error("Error adding todo:", error);
+    console.error("Error adding todo:", error.response?.data || error.message);
+    throw error.response?.data || { message: "Failed to add todo." }; // Return error
   }
 };
 
@@ -29,7 +30,8 @@ export const updateTodo = async (documentId, updatedFields) => {
     const response = await axios.put(`${API_URL}/todos/${documentId}`, { data: updatedFields });
     return response.data.data;
   } catch (error) {
-    console.error("Error updating todo:", error);
+    console.error("Error updating todo:", error.response?.data || error.message);
+    throw error.response?.data || { message: "Failed to update todo." };
   }
 };
 
@@ -38,7 +40,8 @@ export const deleteTodo = async (documentId) => {
   try {
     await axios.delete(`${API_URL}/todos/${documentId}`);
   } catch (error) {
-    console.error("Error deleting todo:", error);
+    console.error("Error deleting todo:", error.response?.data || error.message);
+    throw error.response?.data || { message: "Failed to delete todo." };
   }
 };
 
