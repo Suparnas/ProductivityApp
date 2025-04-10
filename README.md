@@ -37,6 +37,7 @@ Ensure you have the following installed:
 3. Configure the database in `config/database.js` (PostgreSQL/MongoDB)
 4. Start the Strapi server:
    ```bash
+   npm run develop
    ```
 
 ### Frontend Setup (React)

@@ -1,0 +1,106 @@
+
+> my-project@0.1.0 develop
+> strapi develop
+
+- Cleaning dist dir /Users/suparnasoman/Documents/Ecommerce/Strapi-todo-app/backend-strapi/dist
+✔ Cleaning dist dir (6ms)
+- Loading Strapi
+- Building build context
+
+[INFO] Including the following ENV variables as part of the JS bundle:
+    - ADMIN_PATH
+    - STRAPI_ADMIN_BACKEND_URL
+    - STRAPI_TELEMETRY_DISABLED
+✔ Building build context (75ms)
+- Creating admin
+✔ Creating admin (223ms)
+✔ Loading Strapi (779ms)
+- Generating types
+✔ Generating types (167ms)
+- Compiling TS
+- Cleaning dist dir /Users/suparnasoman/Documents/Ecommerce/Strapi-todo-app/backend-strapi/dist
+✔ Cleaning dist dir (3ms)
+✔ Compiling TS (1280ms)
+
+ Project information
+
+[90m┌────────────────────[39m[90m┬──────────────────────────────────────────────────┐[39m
+[90m│[39m Time               [90m│[39m Mon Apr 07 2025 22:26:05 GMT-0400 (Eastern Dayl… [90m│[39m
+[90m│[39m Launched in        [90m│[39m 2241 ms                                          [90m│[39m
+[90m│[39m Environment        [90m│[39m development                                      [90m│[39m
+[90m│[39m Process PID        [90m│[39m 6464                                             [90m│[39m
+[90m│[39m Version            [90m│[39m 5.11.1 (node v20.11.1)                           [90m│[39m
+[90m│[39m Edition            [90m│[39m Community                                        [90m│[39m
+[90m│[39m Database           [90m│[39m sqlite                                           [90m│[39m
+[90m│[39m Database name      [90m│[39m .tmp/data.db                                     [90m│[39m
+[90m└────────────────────[39m[90m┴──────────────────────────────────────────────────┘[39m
+
+ Actions available
+
+Welcome back!
+To access the server ⚡️, go to:
+http://localhost:1337
+
+[2025-04-07 22:26:05.653] [32minfo[39m: Strapi started successfully
+[2025-04-07 22:26:12.170] [32mhttp[39m: GET /api/users/me (39 ms) 200
+[2025-04-07 22:26:12.188] [32mhttp[39m: GET /api/users/me (12 ms) 200
+[2025-04-07 22:26:12.199] [32mhttp[39m: GET /api/todos (9 ms) 200
+[2025-04-07 22:26:12.207] [32mhttp[39m: GET /api/users/me (6 ms) 200
+[2025-04-07 22:26:12.216] [32mhttp[39m: GET /api/todos (7 ms) 200
+[2025-04-07 22:26:12.225] [32mhttp[39m: GET /api/users/me (7 ms) 200
+[2025-04-07 22:26:19.368] [32mhttp[39m: POST /api/auth/local (115 ms) 200
+[2025-04-07 22:26:19.399] [32mhttp[39m: GET /api/todos (9 ms) 200
+[2025-04-07 22:26:19.407] [32mhttp[39m: GET /api/todos (6 ms) 200
+[2025-04-07 22:29:29.786] [32mhttp[39m: GET /api/todos (10 ms) 200
+[2025-04-07 22:29:29.801] [32mhttp[39m: GET /api/todos (10 ms) 200
+[2025-04-07 22:29:58.287] [32mhttp[39m: GET /api/todos (12 ms) 200
+[2025-04-07 22:29:58.296] [32mhttp[39m: GET /api/todos (6 ms) 200
+[2025-04-07 22:31:14.746] [32mhttp[39m: POST /api/auth/local (93 ms) 200
+[2025-04-07 22:31:17.714] [32mhttp[39m: POST /api/auth/local (100 ms) 200
+[2025-04-07 22:32:03.041] [32mhttp[39m: GET /api/todos (9 ms) 200
+[2025-04-07 22:32:03.051] [32mhttp[39m: GET /api/todos (8 ms) 200
+[2025-04-07 22:34:47.592] [32mhttp[39m: POST /api/auth/local (101 ms) 200
+[2025-04-07 22:34:50.481] [32mhttp[39m: POST /api/auth/local (98 ms) 200
+[2025-04-07 22:37:40.282] [32mhttp[39m: POST /api/auth/local (100 ms) 200
+[2025-04-07 22:37:44.739] [32mhttp[39m: POST /api/auth/local (98 ms) 200
+[2025-04-07 22:39:13.513] [32mhttp[39m: POST /api/auth/local (95 ms) 200
+[2025-04-07 22:39:13.529] [32mhttp[39m: OPTIONS /api/todos (1 ms) 204
+[2025-04-07 22:39:13.539] [32mhttp[39m: OPTIONS /api/todos (1 ms) 204
+[2025-04-07 22:39:13.554] [32mhttp[39m: GET /api/todos (11 ms) 200
+[2025-04-07 22:39:13.564] [32mhttp[39m: GET /api/todos (9 ms) 200
+[2025-04-07 22:43:27.560] [32mhttp[39m: POST /api/auth/local (98 ms) 200
+[2025-04-07 22:43:27.887] [32mhttp[39m: GET /api/todos (13 ms) 200
+[2025-04-07 22:43:27.895] [32mhttp[39m: GET /api/todos (6 ms) 200
+[2025-04-07 22:43:45.723] [32mhttp[39m: POST /api/auth/local (99 ms) 200
+[2025-04-07 22:43:46.045] [32mhttp[39m: GET /api/todos (15 ms) 200
+[2025-04-07 22:43:46.057] [32mhttp[39m: GET /api/todos (7 ms) 200
+[2025-04-07 22:49:23.607] [32mhttp[39m: POST /api/auth/local (98 ms) 200
+[2025-04-07 22:49:23.924] [32mhttp[39m: GET /api/todos (8 ms) 200
+[2025-04-07 22:49:23.934] [32mhttp[39m: GET /api/todos (8 ms) 200
+[2025-04-07 22:51:33.744] [32mhttp[39m: GET /api/todos (11 ms) 200
+[2025-04-07 22:51:33.763] [32mhttp[39m: GET /api/todos (15 ms) 200
+[2025-04-07 22:52:01.738] [32mhttp[39m: GET /api/todos (23 ms) 200
+[2025-04-07 22:52:01.757] [32mhttp[39m: GET /api/todos (16 ms) 200
+[2025-04-07 22:53:14.639] [32mhttp[39m: GET /api/todos (5 ms) 200
+[2025-04-07 22:53:14.647] [32mhttp[39m: GET /api/todos (6 ms) 200
+[2025-04-07 22:54:22.619] [32mhttp[39m: GET /api/todos (10 ms) 200
+[2025-04-07 22:54:22.629] [32mhttp[39m: GET /api/todos (8 ms) 200
+[2025-04-07 22:56:04.898] [32mhttp[39m: POST /api/todos (5 ms) 400
+[2025-04-07 22:56:20.639] [32mhttp[39m: GET /api/auth/google (8 ms) 404
+[2025-04-07 22:58:57.764] [32mhttp[39m: POST /api/auth/local (97 ms) 200
+[2025-04-07 22:58:58.089] [32mhttp[39m: GET /api/todos (15 ms) 200
+[2025-04-07 22:58:58.098] [32mhttp[39m: GET /api/todos (7 ms) 200
+[2025-04-07 22:59:22.223] [32mhttp[39m: GET /api/todos (9 ms) 200
+[2025-04-07 22:59:22.232] [32mhttp[39m: GET /api/todos (8 ms) 200
+[2025-04-07 23:00:02.110] [32mhttp[39m: POST /api/auth/local (12 ms) 403
+[2025-04-07 23:00:03.369] [32mhttp[39m: POST /api/auth/local (13 ms) 403
+[2025-04-07 23:00:27.008] [32mhttp[39m: POST /api/auth/local (94 ms) 200
+[2025-04-07 23:00:27.336] [32mhttp[39m: GET /api/todos (14 ms) 200
+[2025-04-07 23:00:27.344] [32mhttp[39m: GET /api/todos (7 ms) 200
+[2025-04-07 23:08:22.974] [32mhttp[39m: POST /api/auth/local (25 ms) 403
+[2025-04-07 23:08:24.397] [32mhttp[39m: POST /api/auth/local (10 ms) 403
+[2025-04-07 23:08:57.508] [32mhttp[39m: POST /api/auth/local (9 ms) 403
+[2025-04-07 23:09:10.474] [32mhttp[39m: POST /api/auth/local (9 ms) 403
+11:10:05 PM [vite] page reload .strapi/client/index.html
+[2025-04-07 23:10:11.668] [32mhttp[39m: HEAD /admin (36 ms) 200
+[2025-04-07 23:10:27.475] [32mhttp[39m: POST /api/auth/local (13 ms) 403

@@ -1,0 +1,239 @@
+/* General Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Arial', sans-serif;
+  line-height: 1.6;
+  color: #333;
+  background-color: #f9f9f9;
+}
+
+/* Navigation */
+.landing-nav {
+  position: sticky; /* Makes the nav sticky */
+  top: 0; /* Sticks to the top of the viewport */
+  left: 0;
+  width: 100%; /* Ensures it spans the full width */
+  display: flex;
+  /* justify-content: space-between; */
+  align-items: center;
+  padding: 3rem 2rem;
+  background-color: rgba(255, 255, 255, 0.132); /* Semi-transparent white */
+  backdrop-filter: blur(10px); /* Adds a blur effect for a glassy look */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  z-index: 1000; /* Ensures it stays above other elements */
+  margin: 0 auto; /* Centers the content */
+  max-width: 1200px; /* Optional: Limits the width for better alignment */
+}
+
+.landing-logo {
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: #007bff;
+}
+
+.landing-nav-right {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.landing-nav-right a {
+  text-decoration: none;
+  color: #ffffff;
+  font-weight: 500;
+  transition: color 0.2s;
+}
+
+.landing-nav-right a:hover {
+  color: #3dec40;
+}
+
+/* Hero Section */
+.landing-hero {
+  display: flex;
+  align-items: center;
+  /* justify-content: space-between; */
+  padding: 2rem 2rem;
+  height: 70vh; 
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.landing-title {
+  font-size: 3rem;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 1rem;
+}
+
+.landing-description {
+  font-size: 1.2rem;
+  color: #555;
+  margin-bottom: 2rem;
+}
+
+.landing-cta {
+  display: flex;
+  gap: 1rem;
+}
+
+.landing-cta a {
+  text-decoration: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  font-weight: bold;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+.landing-cta .btn-primary {
+  background-color: #007bff;
+  color: #fff;
+}
+
+.landing-cta .btn-primary:hover {
+  background-color: #0056b3;
+}
+
+.landing-cta .btn-secondary {
+  background-color: #f8f9fa;
+  color: #333;
+}
+
+.landing-cta .btn-secondary:hover {
+  background-color: #e2e6ea;
+}
+
+.landing-image-container {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.landing-image-container img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 16px;
+}
+
+/* Features Section */
+.features-section {
+  padding: 6rem 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.features-title {
+  text-align: center;
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin-bottom: 2rem;
+}
+
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+}
+
+.feature-card {
+  background: #fff;
+  padding: 2rem;
+  border-radius: 16px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.feature-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+}
+
+.feature-icon {
+  background: #007bff;
+  width: 56px;
+  height: 56px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  color: #fff;
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.feature-title {
+  font-size: 1.25rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+.feature-description {
+  color: #555;
+  line-height: 1.6;
+}
+
+/* Footer */
+.landing-footer {
+  background-color: #333;
+  color: #fff;
+  text-align: center;
+  padding: 2rem 1rem;
+}
+
+.landing-footer a {
+  color: #007bff;
+  text-decoration: none;
+}
+
+.landing-footer a:hover {
+  color: #0056b3;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .landing-hero {
+    flex-direction: column;
+    text-align: center;
+    padding: 6rem;
+  }
+
+  .landing-title {
+    font-size: 2.5rem;
+  }
+
+  .landing-cta {
+    justify-content: center;
+  }
+
+  .landing-image-container {
+    order: -1;
+  }
+}
+
+@media (max-width: 480px) {
+  .landing-nav {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .landing-logo {
+    font-size: 1.5rem;
+  }
+
+  .landing-nav-right {
+    gap: 1rem;
+  }
+
+  .landing-title {
+    font-size: 2rem;
+  }
+
+  .landing-description {
+    font-size: 1.1rem;
+  }
+}

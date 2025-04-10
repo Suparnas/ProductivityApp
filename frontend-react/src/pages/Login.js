@@ -1,39 +1,112 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { loginUser } from "../api/todoApi";
-import "../styles/auth.css"; // Importing from styles folder
+import "../styles/Auth.css";
+import SocialLogin from '../components/SocialLogin';
 
-const Login = () => {
-  const [credentials, setCredentials] = useState({ identifier: "", password: "" });
-  const [error, setError] = useState("");
+const Login = ({ setIsAuthenticated }) => {
   const navigate = useNavigate();
+  const [credentials, setCredentials] = useState({ email: "", password: "" });
+  const [error, setError] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleChange = (e) => {
     setCredentials({ ...credentials, [e.target.name]: e.target.value });
+    // Clear error when user starts typing
+    if (error) setError("");
   };
 
-  const handleLogin = async (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    const response = await loginUser(credentials);
-    if (response?.jwt) {
-      localStorage.setItem("authToken", response.jwt);
-      localStorage.setItem("user", JSON.stringify(response.user));
-      navigate("/");
-    } else {
-      setError("Invalid email or password!");
+    setIsLoading(true);
+    setError("");
+
+    try {
+      const data = await loginUser(credentials);
+      if (data) {
+        setIsAuthenticated(true);
+        navigate("/");
+      } else {
+        setError("Invalid credentials. Please check your email and password.");
+      }
+    } catch (err) {
+      setError(err.message || "An error occurred during login. Please try again.");
+    } finally {
+      setIsLoading(false);
     }
   };
 
   return (
     <div className="auth-container">
-      <h2>Login</h2>
-      {error && <p className="error">{error}</p>}
-      <form onSubmit={handleLogin}>
-        <input type="text" name="identifier" placeholder="Email" value={credentials.identifier} onChange={handleChange} required />
-        <input type="password" name="password" placeholder="Password" value={credentials.password} onChange={handleChange} required />
-        <button type="submit">Login</button>
-      </form>
-      <p>Don't have an account? <a href="/register">Register</a></p>
+      <div className="auth-card">
+        <div>
+          <h1 className="auth-title">Welcome to Taskie</h1>
+          <p className="auth-subtitle">Sign in to continue managing your tasks</p>
+        </div>
+
+        {error && (
+          <div className="auth-error" role="alert">
+            {error}
+          </div>
+        )}
+
+        <form onSubmit={handleSubmit} className="auth-form">
+          <div className="form-group">
+            <label htmlFor="email">Email</label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              className="form-input"
+              value={credentials.email}
+              onChange={handleChange}
+              required
+              placeholder="Enter your email"
+              autoComplete="email"
+            />
+          </div>
+
+          <div className="form-group">
+            <label htmlFor="password">Password</label>
+            <input
+              type="password"
+              id="password"
+              name="password"
+              className="form-input"
+              value={credentials.password}
+              onChange={handleChange}
+              required
+              placeholder="Enter your password"
+              autoComplete="current-password"
+            />
+          </div>
+
+          <button 
+            type="submit" 
+            className="auth-button"
+            disabled={isLoading}
+          >
+            {isLoading ? (
+              <>
+                <span className="auth-loading"></span>
+                Signing in...
+              </>
+            ) : (
+              "Sign in"
+            )}
+          </button>
+        </form>
+
+        <div className="auth-divider">
+          <span>or</span>
+        </div>
+
+        <SocialLogin />
+
+        <p className="auth-switch">
+          Don't have an account? <Link to="/register">Create one</Link>
+        </p>
+      </div>
     </div>
   );
 };

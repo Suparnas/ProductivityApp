@@ -36,13 +36,13 @@ test.describe('Todo App - Validation Tests', () => {
     page = await context.newPage();
 
     // 4️⃣ Perform UI login
-    await page.goto('http://localhost:3000');
-    await page.fill('input[placeholder="Username or Email"]', testUser.email);
-    await page.fill('input[placeholder="Password"]', testUser.password);
-    await page.getByRole('button', { name: 'Login' }).click();
+    await page.goto('http://localhost:3000/login');
+    await page.fill('input[placeholder="Enter your email"]', testUser.email);
+    await page.fill('input[placeholder="Enter your password"]', testUser.password);
+    await page.getByRole('button', { name: 'Sign in' }).click();
 
     // 5️⃣ Ensure login was successful
-    await expect(page.locator('h2:has-text("Welcome")')).toBeVisible();
+    await expect(page.locator('nav a', { hasText: 'Dashboard' })).toBeVisible();
 
     // 6️⃣ Save storage state to reuse in tests
     await context.storageState({ path: 'auth.json' });
